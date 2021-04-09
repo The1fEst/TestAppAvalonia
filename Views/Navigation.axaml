@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:TestApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TestApp.Views.Navigation"
+             Background="Transparent">
+    <Design.DataContext>
+        <v:NavigationViewModel />
+    </Design.DataContext>
+
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="1" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <DockPanel>
+            <Grid ColumnDefinitions="50,Auto" DockPanel.Dock="Top">
+                <Button Classes="UIButton"
+                        IsEnabled="False"
+                        Content="{Binding BackName}"
+                        Command="{Binding Back}"
+                        Grid.Column="0" />
+                <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                <GridSplitter Grid.Column="1" />
+            </Grid>
+            <ListBox x:Name="NavList"
+                     Items="{Binding  NavItems}"
+                     DoubleTapped="NavList_OnDoubleTapped"
+                     DockPanel.Dock="Bottom"
+                     Background="Transparent">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Key}" TextAlignment="Center" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+    </Panel>
+
+</UserControl>
