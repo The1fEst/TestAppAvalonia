@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using TestApp.Controllers;
 using TestApp.ViewModels;
 using TestApp.Views;
+using TestApp.Windows;
 
 namespace TestApp {
     public class App : Application {

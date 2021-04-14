@@ -6,7 +6,7 @@ using Avalonia.Markup.Xaml;
 using TestApp.Controllers;
 using TestApp.ViewModels;
 
-namespace TestApp.Views {
+namespace TestApp.Windows {
     public class MainWindow : Window {
         private MainWindowViewModel? _vm;
 
@@ -21,21 +21,29 @@ namespace TestApp.Views {
             AvaloniaXamlLoader.Load(this);
 
             var workspace = this.FindControl<Grid>("Workspace");
-            
+
             App.Navigation = new NavigationController<string>(workspace);
             App.Navigation.NavigateTo("");
         }
-        
-        private void OnClick(object sender, RoutedEventArgs e)
-        {
+
+        private void OnClick(object sender, RoutedEventArgs e) {
             _vm?.PrepareAvailableItems();
         }
 
-        protected override void OnDataContextChanged(EventArgs e)
-        {
+        protected override void OnDataContextChanged(EventArgs e) {
             base.OnDataContextChanged(e);
 
             _vm = DataContext as MainWindowViewModel;
+        }
+
+        private void Button_OnClick(object? sender, RoutedEventArgs e) {
+            if (_vm != null) {
+                _vm.Icon = _vm.IsDay
+                    ? "fas fa-moon"
+                    : "fas fa-sun";
+
+                _vm.IsDay = !_vm.IsDay;
+            }
         }
     }
 }

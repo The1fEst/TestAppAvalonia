@@ -10,6 +10,14 @@ using ReactiveUI;
 
 namespace TestApp.ViewModels {
     public class MainWindowViewModel : ViewModelBase {
+        private string _icon = "fas fa-sun";
+        public string Icon {
+            get => _icon;
+            set => this.RaiseAndSetIfChanged(ref _icon, value);
+        }
+
+        public bool IsDay { get; set; } = true;
+        
         private readonly ReadOnlyObservableCollection<(int, string)> _availableItems;
         private readonly SourceList<(int, string)> _allAvailableItems;
         private string _searchText;
