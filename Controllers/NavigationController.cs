@@ -7,6 +7,8 @@ namespace TestApp.Controllers {
         private Dictionary<T, Control> _views;
         private Panel _workspace;
 
+        public Dictionary<T, Control> Views { get; }
+
         public NavigationController(Panel workspace, Dictionary<T, Control>? views = null) {
             _workspace = workspace;
             _views = views ?? new();

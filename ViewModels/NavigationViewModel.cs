@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Avalonia.Controls;
+using TestApp.Models.Constants;
 
 namespace TestApp.ViewModels {
     public class NavigationViewModel : ViewModelBase {
@@ -7,7 +9,7 @@ namespace TestApp.ViewModels {
 
         public string BackName { get; set; } = "<-";
 
-        public Dictionary<string, Action> NavItems { get; set; } = new();
+        public Dictionary<ViewEnum, string> NavItems { get; set; } = new();
 
         public void Back() {
         }

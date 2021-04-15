@@ -1,14 +1,85 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <SolidColorBrush x:Key="UIColor">#1b6fcf</SolidColorBrush>
+        <SolidColorBrush x:Key="UIColorTransparent">#771b6fcf</SolidColorBrush>
+        <SolidColorBrush x:Key="UITransparent">#22ffffff</SolidColorBrush>
+        <SolidColorBrush x:Key="UITransparentDark">#22000000</SolidColorBrush>
+    </Styles.Resources>
+
     <Style Selector="Button.UIButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style Selector="Button.UIButton /template/ ContentPresenter">
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+
+    <Style Selector="Button:pointerover.UIButton /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource UIColor}" />
+    </Style>
+
+    <Style Selector="Button:pressed.UIButton /template/ ContentPresenter" />
+
+    <Style Selector="ListBox.UIListBox > ListBoxItem">
+        <Setter Property="BorderThickness" Value="3,0,0,0" />
+        <Setter Property="Margin" Value="0,5" />
+    </Style>
+
+    <Style Selector="ListBox.UIListBox > ListBoxItem:pointerover /template/ ContentPresenter">
+        <Setter Property="BorderBrush" Value="{StaticResource UIColorTransparent}" />
+    </Style>
+
+    <Style Selector="ListBox.UIListBox > ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="BorderBrush" Value="{StaticResource UIColor}" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style Selector="TextBox.UITextBox">
+        <Setter Property="Background" Value="{StaticResource UITransparentDark}" />
+        <Setter Property="Height" Value="30" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Border CornerRadius="0" Padding="5">
-                    <TextBlock Text="{TemplateBinding Content}"></TextBlock>
+                <Border
+                        Background="{TemplateBinding Background}">
+                    <TextPresenter Name="PART_TextPresenter"
+                                   Text="{TemplateBinding Text, Mode=TwoWay}"
+                                   CaretIndex="{TemplateBinding CaretIndex}"
+                                   SelectionStart="{TemplateBinding SelectionStart}"
+                                   SelectionEnd="{TemplateBinding SelectionEnd}"
+                                   TextAlignment="{TemplateBinding TextAlignment}"
+                                   TextWrapping="{TemplateBinding TextWrapping}"
+                                   PasswordChar="{TemplateBinding PasswordChar}"
+                                   RevealPassword="{TemplateBinding RevealPassword}"
+                                   SelectionBrush="{TemplateBinding SelectionBrush}"
+                                   SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                                   CaretBrush="{TemplateBinding CaretBrush}" />
                 </Border>
             </ControlTemplate>
         </Setter>
+    </Style>
+
+    <Style Selector="TextBox:focus.UITextBox /template/ Border#border">
+        <Setter Property="Background" Value="{StaticResource UITransparentDark}" />
+        <Setter Property="BorderBrush" Value="{StaticResource UITransparentDark}"/>
+    </Style>
+
+    <Style Selector="ListBox.MainListBox">
+        <Setter Property="Padding" Value="0,10" />
+    </Style>
+
+    <Style Selector="ListBox.MainListBox > ListBoxItem">
+        <Setter Property="BorderThickness" Value="0,0,0,3" />
+    </Style>
+
+    <Style Selector="ListBox.MainListBox > ListBoxItem:pointerover /template/ ContentPresenter">
+        <Setter Property="BorderBrush" Value="{StaticResource UIColorTransparent}" />
+    </Style>
+
+    <Style Selector="ListBox.MainListBox > ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="BorderBrush" Value="{StaticResource UIColor}" />
+        <Setter Property="Background" Value="{StaticResource UITransparent}" />
     </Style>
 </Styles>

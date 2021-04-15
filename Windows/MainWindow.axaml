@@ -3,13 +3,17 @@
         xmlns:vm="using:TestApp.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
-        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="200"
-        x:Class="TestApp.Windows.MainWindow"
+        xmlns:v="clr-namespace:TestApp.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TestApp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="TestApp"
         TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent">
+        Background="Transparent"
+        ExtendClientAreaChromeHints="PreferSystemChrome"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="99999"
+        CanResize="False">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />
@@ -22,15 +26,13 @@
                     BackgroundSource="Digger"
                     TintColor="Black"
                     TintOpacity="1"
-                    MaterialOpacity="0.65" />
+                    MaterialOpacity="0" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
-        <Grid RowDefinitions="Auto,Auto,*, Auto">
-            <Panel Grid.Row="0">
-                <i:Icon Value="{Binding Icon}" />
-            </Panel>
 
-            <Button i:Attached.Icon="fab fa-github" Grid.Row="1" Click="Button_OnClick" />
+        <Grid ColumnDefinitions="300,*">
+            <v:Navigation x:Name="NavBar" Grid.Column="0" />
+            <Grid x:Name="Workspace" Grid.Column="1" Margin="20,40,20,20" />
         </Grid>
     </Panel>
 

@@ -17,30 +17,27 @@
                     BackgroundSource="Digger"
                     TintColor="Black"
                     TintOpacity="1"
-                    MaterialOpacity="1" />
+                    MaterialOpacity=".6" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
 
         <DockPanel>
             <Grid ColumnDefinitions="50,Auto" DockPanel.Dock="Top">
                 <Button Classes="UIButton"
-                        IsEnabled="False"
                         Content="{Binding BackName}"
                         Command="{Binding Back}"
                         Grid.Column="0" />
-                <TextBlock Grid.Column="1" Text="{Binding Name}" />
-                <GridSplitter Grid.Column="1" />
+                <TextBlock Padding="10" Grid.Column="1" Text="{Binding Name}" />
             </Grid>
             <ListBox x:Name="NavList"
+                     Classes="UIListBox"
+                     SelectionChanged="NavList_OnSelectionChanged"
                      Items="{Binding  NavItems}"
-                     DoubleTapped="NavList_OnDoubleTapped"
                      DockPanel.Dock="Bottom"
                      Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Key}" TextAlignment="Center" />
-                        </StackPanel>
+                        <TextBlock Text="{Binding Value}" TextAlignment="Center"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
