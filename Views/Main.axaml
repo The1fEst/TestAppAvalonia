@@ -5,11 +5,11 @@
              xmlns:vm="clr-namespace:TestApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TestApp.Views.Main">
-    
+
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
-    
+
     <Grid ColumnDefinitions="200, *" RowDefinitions="*, 100,100">
         <ListBox
             Grid.Row="0"
@@ -18,8 +18,14 @@
             Items="{Binding AvailableItems}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Value}"
-                               TextAlignment="Center" />
+                    <Grid ColumnDefinitions="*, 50" VerticalAlignment="Center">
+                        <Label Grid.Column="0"
+                               Content="{Binding Name}" />
+                        <Button Grid.Column="1"
+                                Content="->"
+                                Command="{Binding OpenItem}"
+                                CommandParameter="Key" />
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -27,12 +33,14 @@
         <TextBox Grid.Row="1"
                  Grid.Column="1"
                  Classes="UITextBox"
+                 Watermark="Search"
                  Text="{Binding SearchText}" />
 
         <TextBox Grid.Row="2"
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
-                 Classes="UITextBox"/>
+                 Watermark="Result"
+                 Classes="UITextBox" />
     </Grid>
-    
+
 </UserControl>

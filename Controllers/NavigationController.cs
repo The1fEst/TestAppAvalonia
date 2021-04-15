@@ -4,10 +4,8 @@ using Window = Avalonia.Controls.Window;
 
 namespace TestApp.Controllers {
     public class NavigationController<T> where T : notnull {
-        private Dictionary<T, Control> _views;
-        private Panel _workspace;
-
-        public Dictionary<T, Control> Views { get; }
+        private readonly Dictionary<T, Control> _views;
+        private readonly Panel _workspace;
 
         public NavigationController(Panel workspace, Dictionary<T, Control>? views = null) {
             _workspace = workspace;
@@ -19,6 +17,11 @@ namespace TestApp.Controllers {
             
             var view = _views[viewKey];
 
+            _workspace.Children.Clear();
+            _workspace.Children.Add(view);
+        }
+        
+        public void NavigateTo(Control view) {
             _workspace.Children.Clear();
             _workspace.Children.Add(view);
         }

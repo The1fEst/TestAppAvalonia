@@ -1,20 +1,20 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using TestApp.Controllers;
+using TestApp.Models.Constants;
 using TestApp.ViewModels;
+using TestApp.Views;
 
 namespace TestApp.Windows {
     public class MainWindow : Window {
-        private MainWindowViewModel? _vm;
-
         public MainWindow() {
             InitializeComponent();
-#if DEBUG
             this.AttachDevTools();
-#endif
         }
 
         private void InitializeComponent() {
@@ -22,28 +22,25 @@ namespace TestApp.Windows {
 
             var workspace = this.FindControl<Grid>("Workspace");
 
-            App.Navigation = new NavigationController<string>(workspace);
-            App.Navigation.NavigateTo("");
+            var views = new Dictionary<ViewEnum, Control> {
+                {ViewEnum.Main, new Main()},
+                {ViewEnum.Settings, new Settings()}
+            };
+
+            App.Navigation = new NavigationController<ViewEnum>(workspace, views);
+
+            FillNavBar(views);
         }
 
-        private void OnClick(object sender, RoutedEventArgs e) {
-            _vm?.PrepareAvailableItems();
-        }
+        private void FillNavBar(Dictionary<ViewEnum, Control> views) {
+            var navBar = this.FindControl<Navigation>("NavBar");
 
-        protected override void OnDataContextChanged(EventArgs e) {
-            base.OnDataContextChanged(e);
+            navBar.DataContext = new NavigationViewModel {
+                NavItems = views.ToDictionary(x => x.Key, x => x.Key.ToString())
+            };
 
-            _vm = DataContext as MainWindowViewModel;
-        }
-
-        private void Button_OnClick(object? sender, RoutedEventArgs e) {
-            if (_vm != null) {
-                _vm.Icon = _vm.IsDay
-                    ? "fas fa-moon"
-                    : "fas fa-sun";
-
-                _vm.IsDay = !_vm.IsDay;
-            }
+            var navList = navBar.FindControl<ListBox>("NavList");
+            navList.SelectedIndex = 0;
         }
     }
 }

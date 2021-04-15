@@ -7,14 +7,16 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using DynamicData;
 using ReactiveUI;
+using TestApp.Models;
+using Item = TestApp.Views.Item;
 
 namespace TestApp.ViewModels {
     public class MainViewModel : ViewModelBase {
-        private readonly ReadOnlyObservableCollection<KeyValuePair<string, string>> _availableItems;
-        private readonly SourceList<KeyValuePair<string, string>> _allAvailableItems;
-        private string _searchText;
+        private readonly ReadOnlyObservableCollection<ListBoxItemData> _availableItems;
+        private readonly SourceList<ListBoxItemData> _allAvailableItems;
+        private string _searchText = null!;
 
-        public ReadOnlyObservableCollection<KeyValuePair<string, string>> AvailableItems => _availableItems;
+        public ReadOnlyObservableCollection<ListBoxItemData> AvailableItems => _availableItems;
 
         public string SearchText {
             get => _searchText;
@@ -22,7 +24,7 @@ namespace TestApp.ViewModels {
         }
 
         public MainViewModel() {
-            _allAvailableItems = new SourceList<KeyValuePair<string, string>>();
+            _allAvailableItems = new SourceList<ListBoxItemData>();
 
             var filter = this.WhenAnyValue(vm => vm.SearchText)
                 .Throttle(TimeSpan.FromMilliseconds(100))
@@ -35,19 +37,23 @@ namespace TestApp.ViewModels {
                 .Subscribe();
         }
 
-        public void PrepareAvailableItems(IEnumerable<KeyValuePair<string, string>> items) {
+        public void PrepareAvailableItems(IEnumerable<ListBoxItemData> items) {
             _allAvailableItems.Edit(l => {
                 l.Clear();
                 l.AddRange(items);
             });
         }
 
-        private Func<KeyValuePair<string, string>, bool> BuildFilter(string searchText) {
+        private Func<ListBoxItemData, bool> BuildFilter(string searchText) {
             if (string.IsNullOrEmpty(searchText)) {
                 return _ => true;
             }
 
-            return t => t.Value.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+            return t => t.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public void OpenItem(string url) {
+            App.Navigation?.NavigateTo(new Item(url));
         }
     }
 }
