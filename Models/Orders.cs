@@ -3,15 +3,14 @@ using System.Collections.Generic;
 
 namespace TestApp.Models {
     public class Orders {
-        public OrderPayload Payload { get; set; } = new ();
+        public OrderPayload Payload { get; set; } = new();
     }
 
     public class OrderPayload {
-        public List<Order> Orders { get; set; } = new ();
+        public List<Order> Orders { get; set; } = new();
     }
 
-    public class Order
-    {
+    public class Order {
         public bool Visible { get; set; }
         public long Quantity { get; set; }
         public DateTimeOffset CreationDate { get; set; }
@@ -35,13 +34,24 @@ namespace TestApp.Models {
         public string Id { get; set; } = "";
     }
 
-    public enum OrderType { Sell };
+    public enum OrderType {
+        Sell
+    }
 
-    public enum Platform { Pc };
+    public enum Platform {
+        Pc
+    }
 
-    public enum Region { De, En };
+    public enum Region {
+        De,
+        En
+    }
 
-    public enum Status { Ingame, Offline, Online };
+    public enum Status {
+        Ingame,
+        Offline,
+        Online
+    }
 
     public class Achievement {
         public string Name { get; set; } = "";

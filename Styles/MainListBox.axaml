@@ -22,6 +22,7 @@
         <Setter Property="Margin" Value="0,0,0,5" />
         <Setter Property="BorderThickness" Value="{StaticResource UiBottomBorder}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Height" Value="64" />
     </Style>
 
     <Style Selector="ListBox.MainListBox > ListBoxItem:pointerover /template/ ContentPresenter">

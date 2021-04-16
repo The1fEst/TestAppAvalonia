@@ -9,7 +9,4 @@
         <Thickness x:Key="UiBottomBorder">0,0,0,3</Thickness>
         <Thickness x:Key="UiLeftBorder">3,0,0,0</Thickness>
     </Styles.Resources>
-
-    
-    
 </Styles>

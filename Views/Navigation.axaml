@@ -22,12 +22,15 @@
         </ExperimentalAcrylicBorder>
 
         <DockPanel>
-            <Grid ColumnDefinitions="50,Auto" DockPanel.Dock="Top">
+            <Grid ColumnDefinitions="50,Auto"
+                  DockPanel.Dock="Top">
                 <Button Classes="UIButton"
                         Content="{Binding BackName}"
                         Command="{Binding Back}"
                         Grid.Column="0" />
-                <TextBlock Padding="10" Grid.Column="1" Text="{Binding Name}" />
+                <TextBlock Grid.Column="1"
+                           Padding="10"
+                           Text="{Binding Name}" />
             </Grid>
             <ListBox x:Name="NavList"
                      Classes="UIListBox"
@@ -37,7 +40,8 @@
                      Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Value}" TextAlignment="Center"/>
+                        <TextBlock Text="{Binding Value}"
+                                   TextAlignment="Center" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Avalonia.Controls;
 using TestApp.Models.Constants;
 
 namespace TestApp.ViewModels {
@@ -12,6 +10,7 @@ namespace TestApp.ViewModels {
         public Dictionary<ViewEnum, string> NavItems { get; set; } = new();
 
         public void Back() {
+            App.Navigation?.Back();
         }
     }
 }

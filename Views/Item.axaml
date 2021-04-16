@@ -1,26 +1,62 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:TestApp.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Name="Item"
              x:Class="TestApp.Views.Item">
 
     <Design.DataContext>
         <vm:ItemViewModel />
     </Design.DataContext>
 
-    <Grid ColumnDefinitions="*, *">
-        <ListBox Items="{Binding AllAvailableItems}">
-            <ListBox.ItemTemplate>
+    <Grid RowDefinitions="30,64,*,64">
+        <TextBlock Grid.Row="0"
+                   TextAlignment="Center"
+                   Text="{Binding Name}" />
+
+        <ItemsControl Grid.Row="1"
+                      Items="{Binding Items}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Spacing="16" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="64, *" RowDefinitions="64" VerticalAlignment="Center">
-                        <Image Grid.Column="0" Source="{Binding Icon}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Name}" />
-                    </Grid>
+                    <Button Command="{Binding OpenItem}"
+                            CommandParameter="{Binding #Item}">
+                        <StackPanel>
+                            <Image Source="{Binding Icon}"
+                                   Height="32" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </Button>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Grid Grid.Row="2"
+              ColumnDefinitions="250,*">
+            <StackPanel Grid.Column="0">
+                <Image Source="{Binding Icon}"
+                       Width="128" />
+                <TextBlock TextAlignment="Center"
+                           Text="{Binding Description}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <TabControl Grid.Column="1">
+                <TabItem Header="q">
+                    <ListBox />
+                </TabItem>
+                <TabItem Header="w">
+                    <ListBox />
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <TextBox Grid.Row="3" />
     </Grid>
 
 </UserControl>

@@ -11,17 +11,15 @@ namespace TestApp.Models {
     }
 
     public class Item {
+        public delegate void OnOpenItem(string message);
+
         public string Id { get; set; } = "";
 
-        [JsonPropertyName("url_name")] 
-        public string UrlName { get; set; } = "";
+        [JsonPropertyName("url_name")] public string UrlName { get; set; } = "";
 
-        [JsonPropertyName("item_name")] 
-        public string ItemName { get; set; } = "";
+        [JsonPropertyName("item_name")] public string ItemName { get; set; } = "";
 
         public string Thumb { get; set; } = "";
-        
-        public delegate void OnOpenItem(string message);
 
         public event OnOpenItem? Open;
 

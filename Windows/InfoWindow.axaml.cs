@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Projektanker.Icons.Avalonia.FontAwesome;
 
 namespace TestApp.Windows {
     public class InfoWindow : Window {
@@ -14,7 +13,6 @@ namespace TestApp.Windows {
 
         private void InitializeComponent() {
             AvaloniaXamlLoader.Load(this);
-            
         }
     }
 }

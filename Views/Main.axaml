@@ -1,9 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:TestApp.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Name="Main"
              x:Class="TestApp.Views.Main">
 
     <Design.DataContext>
@@ -15,16 +13,19 @@
             Grid.Row="0"
             Grid.Column="1"
             Classes="MainListBox"
-            Items="{Binding AvailableItems}">
+            Items="{Binding AvailableItems}"
+            VirtualizationMode="Simple">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*, 50" VerticalAlignment="Center">
-                        <Label Grid.Column="0"
+                    <Grid ColumnDefinitions="32, *, 50" VerticalAlignment="Center">
+                        <Image Grid.Column="0"
+                               Source="{Binding Icon}" />
+                        <Label Grid.Column="1"
                                Content="{Binding Name}" />
-                        <Button Grid.Column="1"
+                        <Button Grid.Column="2"
                                 Content="->"
                                 Command="{Binding OpenItem}"
-                                CommandParameter="Key" />
+                                CommandParameter="{Binding #Main}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

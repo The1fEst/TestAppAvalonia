@@ -9,8 +9,9 @@
     <Application.Styles>
         <FluentTheme Mode="Dark" />
         <StyleInclude Source="avares://TestApp/Styles/Resources.axaml" />
-        <StyleInclude Source="avares://TestApp/Styles/MainListBox.axaml"></StyleInclude>
-        <StyleInclude Source="avares://TestApp/Styles/UIButton.axaml"></StyleInclude>
-        <StyleInclude Source="avares://TestApp/Styles/UIListBox.axaml"></StyleInclude>
-        <StyleInclude Source="avares://TestApp/Styles/UITextBox.axaml"></StyleInclude></Application.Styles>
+        <StyleInclude Source="avares://TestApp/Styles/MainListBox.axaml" />
+        <StyleInclude Source="avares://TestApp/Styles/UIButton.axaml" />
+        <StyleInclude Source="avares://TestApp/Styles/UIListBox.axaml" />
+        <StyleInclude Source="avares://TestApp/Styles/UITextBox.axaml" />
+    </Application.Styles>
 </Application>

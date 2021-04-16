@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive.Linq;
-using Avalonia.Media;
 using Avalonia.Threading;
 using DynamicData;
 using ReactiveUI;
@@ -12,16 +10,9 @@ using Item = TestApp.Views.Item;
 
 namespace TestApp.ViewModels {
     public class MainViewModel : ViewModelBase {
+        public readonly SourceList<ListBoxItemData> _allAvailableItems;
         private readonly ReadOnlyObservableCollection<ListBoxItemData> _availableItems;
-        private readonly SourceList<ListBoxItemData> _allAvailableItems;
         private string _searchText = null!;
-
-        public ReadOnlyObservableCollection<ListBoxItemData> AvailableItems => _availableItems;
-
-        public string SearchText {
-            get => _searchText;
-            set => this.RaiseAndSetIfChanged(ref _searchText, value);
-        }
 
         public MainViewModel() {
             _allAvailableItems = new SourceList<ListBoxItemData>();
@@ -37,6 +28,14 @@ namespace TestApp.ViewModels {
                 .Subscribe();
         }
 
+        public ReadOnlyObservableCollection<ListBoxItemData> AvailableItems => _availableItems;
+        public SourceList<ListBoxItemData> AllAvailableItems => _allAvailableItems;
+
+        public string SearchText {
+            get => _searchText;
+            set => this.RaiseAndSetIfChanged(ref _searchText, value);
+        }
+
         public void PrepareAvailableItems(IEnumerable<ListBoxItemData> items) {
             _allAvailableItems.Edit(l => {
                 l.Clear();
@@ -45,9 +44,7 @@ namespace TestApp.ViewModels {
         }
 
         private Func<ListBoxItemData, bool> BuildFilter(string searchText) {
-            if (string.IsNullOrEmpty(searchText)) {
-                return _ => true;
-            }
+            if (string.IsNullOrEmpty(searchText)) return _ => true;
 
             return t => t.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase);
         }

@@ -5,13 +5,12 @@ using Avalonia.Markup.Xaml;
 using TestApp.Controllers;
 using TestApp.Models.Constants;
 using TestApp.ViewModels;
-using TestApp.Views;
 using TestApp.Windows;
 
 namespace TestApp {
     public class App : Application {
         public static NavigationController<ViewEnum>? Navigation;
-        
+
         public static HttpClient MarketClient => new() {
             BaseAddress = new("https://api.warframe.market")
         };
@@ -26,11 +25,10 @@ namespace TestApp {
         }
 
         public override void OnFrameworkInitializationCompleted() {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 desktop.MainWindow = new MainWindow {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel()
                 };
-            }
 
             base.OnFrameworkInitializationCompleted();
         }

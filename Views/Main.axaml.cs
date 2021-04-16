@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using TestApp.Extensions;
 using TestApp.Models;
@@ -13,12 +8,12 @@ using TestApp.ViewModels;
 
 namespace TestApp.Views {
     public class Main : UserControl {
-        private MainViewModel _vm;
+        private readonly MainViewModel _vm;
 
         public Main() {
             InitializeComponent();
             DataContext = _vm = new MainViewModel();
-            Task.Factory.StartNew(async () => await GetData());
+            Task.Run(async () => await GetData());
         }
 
         private void InitializeComponent() {
@@ -29,9 +24,12 @@ namespace TestApp.Views {
             var data = await App.MarketClient.AsJson<Items>("/v1/items", HttpMethods.Get, null,
                 ("Platform", "pc"), ("Language", "en"));
 
-            _vm.PrepareAvailableItems(data.Payload.Items
-                .OrderBy(x => x.ItemName)
-                .Select(x => new ListBoxItemData(x.ItemName, x.UrlName)));
+            _vm.AllAvailableItems.Edit(l => {
+                l.Clear();
+
+                foreach (var item in data.Payload.Items.OrderBy(x => x.ItemName))
+                    l.Add(new ListBoxItemData(item.ItemName, item.UrlName, item.Thumb));
+            });
         }
     }
 }
