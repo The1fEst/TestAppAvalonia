@@ -1,56 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TestApp.Models {
     public class Orders {
-        public OrderPayload Payload { get; set; } = new();
+        [JsonPropertyName("payload")] public Payload Payload { get; set; }
     }
 
-    public class OrderPayload {
-        public List<Order> Orders { get; set; } = new();
+    public class Payload {
+        [JsonPropertyName("orders")] public List<Order> Orders { get; set; }
     }
 
     public class Order {
-        public bool Visible { get; set; }
-        public long Quantity { get; set; }
-        public DateTimeOffset CreationDate { get; set; }
-        public User User { get; set; } = new();
-        public DateTimeOffset LastUpdate { get; set; }
-        public long Platinum { get; set; }
-        public OrderType OrderType { get; set; }
-        public Region Region { get; set; }
-        public Platform Platform { get; set; }
-        public string Id { get; set; } = "";
-        public long ModRank { get; set; }
+        [JsonPropertyName("order_type")] public string OrderType { get; set; }
+
+        [JsonPropertyName("quantity")] public long Quantity { get; set; }
+
+        [JsonPropertyName("visible")] public bool Visible { get; set; }
+
+        [JsonPropertyName("platinum")] public float Platinum { get; set; }
+
+        [JsonPropertyName("user")] public User User { get; set; }
+
+        [JsonPropertyName("platform")] public string Platform { get; set; }
+
+        [JsonPropertyName("region")] public string Region { get; set; }
+
+        [JsonPropertyName("creation_date")] public DateTimeOffset CreationDate { get; set; }
+
+        [JsonPropertyName("last_update")] public DateTimeOffset LastUpdate { get; set; }
+
+        [JsonPropertyName("id")] public string Id { get; set; }
+
+        [JsonPropertyName("mod_rank")] public long ModRank { get; set; }
     }
 
     public class User {
-        public string IngameName { get; set; } = "";
-        public DateTimeOffset LastSeen { get; set; }
-        public long Reputation { get; set; }
-        public Region Region { get; set; }
-        public string Avatar { get; set; } = "";
-        public Status Status { get; set; }
-        public string Id { get; set; } = "";
+        [JsonPropertyName("reputation")] public long Reputation { get; set; }
+
+        [JsonPropertyName("region")] public string Region { get; set; }
+
+        [JsonPropertyName("last_seen")] public DateTimeOffset LastSeen { get; set; }
+
+        [JsonPropertyName("ingame_name")] public string IngameName { get; set; }
+
+        [JsonPropertyName("avatar")] public string Avatar { get; set; }
+
+        [JsonPropertyName("status")] public string Status { get; set; }
+
+        [JsonPropertyName("id")] public string Id { get; set; }
     }
 
     public enum OrderType {
-        Sell
-    }
-
-    public enum Platform {
-        Pc
-    }
-
-    public enum Region {
-        De,
-        En
-    }
-
-    public enum Status {
-        Ingame,
-        Offline,
-        Online
+        Sell,
+        Buy,
     }
 
     public class Achievement {

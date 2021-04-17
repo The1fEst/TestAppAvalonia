@@ -41,5 +41,19 @@ namespace TestApp.ViewModels {
             get => _icon;
             set => this.RaiseAndSetIfChanged(ref _icon, value);
         }
+
+        private List<OrderItem> _buyOrders;
+
+        public List<OrderItem> BuyOrders {
+            get => _buyOrders;
+            set => this.RaiseAndSetIfChanged(ref _buyOrders, value);
+        }
+
+        private List<OrderItem> _sellOrders;
+
+        public List<OrderItem> SellOrders {
+            get => _sellOrders;
+            set => this.RaiseAndSetIfChanged(ref _sellOrders, value);
+        }
     }
 }

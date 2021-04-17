@@ -11,7 +11,8 @@
     <Grid RowDefinitions="30,64,*,64">
         <TextBlock Grid.Row="0"
                    TextAlignment="Center"
-                   Text="{Binding Name}" />
+                   Text="{Binding Name}"
+                   FontSize="22" />
 
         <ItemsControl Grid.Row="1"
                       Items="{Binding Items}">
@@ -47,11 +48,59 @@
             </StackPanel>
 
             <TabControl Grid.Column="1">
-                <TabItem Header="q">
-                    <ListBox />
+                <TabItem Header="Buy">
+                    <Grid RowDefinitions="32,*">
+                        <Grid Grid.Row="0"
+                              ColumnDefinitions="*,64,64,128"
+                              Background="{StaticResource UiTransparentDark}"
+                              Classes="MainListBox">
+                            <Panel Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock Text="Ingame nickname"
+                                           TextAlignment="Center" />
+                            </Panel>
+                            <Panel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Price"
+                                           TextAlignment="Center" />
+                            </Panel>
+                            <Panel Grid.Column="2" VerticalAlignment="Center">
+                                <TextBlock Text="Count"
+                                           TextAlignment="Center" />
+                            </Panel>
+                        </Grid>
+                        <ListBox Grid.Row="1"
+                                 Items="{Binding BuyOrders}"
+                                 Classes="MainListBox">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="*,64,64,128">
+                                        <Panel Grid.Column="0"
+                                               VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Username}"
+                                                       TextAlignment="Center" />
+                                        </Panel>
+                                        <Panel Grid.Column="1"
+                                               VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Platinum}"
+                                                       TextAlignment="Center" />
+                                        </Panel>
+                                        <Panel Grid.Column="2"
+                                               VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Count}"
+                                                       TextAlignment="Center" />
+                                        </Panel>
+                                        <Panel Grid.Column="3"
+                                               HorizontalAlignment="Center">
+                                            <Button Content="Send offer"
+                                                    Command="{Binding SendOffer}" />
+                                        </Panel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                 </TabItem>
-                <TabItem Header="w">
-                    <ListBox />
+                <TabItem Header="Sell">
+                    <ListBox Items="{Binding SellOrders}" />
                 </TabItem>
             </TabControl>
         </Grid>

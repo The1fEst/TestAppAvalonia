@@ -44,6 +44,29 @@ namespace TestApp.Views {
             _vm.Items = itemSpec.ItemsInSet.Where(x => x.Id != itemSpec.Id).Select(
                 item => new ListBoxItemData(item.En.ItemName, item.UrlName, GetIconUrl(item))
             ).ToList();
+
+            await GetOrders();
+        }
+
+        private async Task GetOrders() {
+            var data = await App.MarketClient.AsJson<Orders>($"/v1/items/{_vm.Url}/orders", HttpMethods.Get, null,
+                ("Platform", "pc"), ("Language", "en"));
+
+            var orders = data.Payload.Orders;
+
+            _vm.BuyOrders = orders.Where(order => order.OrderType == "buy")
+                .Select(order => new OrderItem {
+                    Count = 0,
+                    Platinum = order.Platinum,
+                    Username = order.User.IngameName,
+                }).ToList();
+            
+            _vm.SellOrders = orders.Where(order => order.OrderType == "sell")
+                .Select(order => new OrderItem {
+                    Count = 0,
+                    Platinum = order.Platinum,
+                    Username = order.User.IngameName,
+                }).ToList();
         }
     }
 }
